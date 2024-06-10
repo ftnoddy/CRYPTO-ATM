@@ -1,0 +1,40 @@
+{
+  "name": "bitcoin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node Backend/server.js",
+    "main": "Backend/server.js",
+    "client": "npm run dev --prefix bitcoin-exchange",
+    "server": "nodemon Backend/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm install && npm install --prefix bitcoin-exchange && npm run build --prefix bitcoin-exchange",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "concurrently": "^7.5.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.7.0",
+    "mongoose": "^8.4.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.13",
+    "nodemon": "^2.0.22",
+    "otp-generator": "^4.0.1",
+    "path": "^0.12.7",
+    "router": "^1.3.8",
+    "uuid": "^9.0.1"
+  }
+}
