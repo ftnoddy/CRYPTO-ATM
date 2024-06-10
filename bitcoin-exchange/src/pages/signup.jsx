@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 import axios from 'axios';
 
 function Signup() {
@@ -17,10 +18,10 @@ function Signup() {
   const handleSendOtp = async () => {
     try {
       await axios.post('http://localhost:5000/api/users/send-otp-mail', { email });
-      alert('OTP sent successfully!');
+      toast.success('OTP sent successfully');
     } catch (error) {
       console.error('Error sending OTP', error);
-      alert('Failed to send OTP');
+      toast.error('Failed to send OTP');
     }
   };
 
