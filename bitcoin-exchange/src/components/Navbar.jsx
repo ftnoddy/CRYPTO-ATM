@@ -88,9 +88,9 @@ function Navbar() {
               textDecoration: "none",
             })}
           >
-            <li className="mr-10 p-1 border-2 border-transparent hover:text-black hover:border-purple-500 hover:bg-white rounded">
+            <div className="mr-10 p-1 border-2 border-transparent hover:text-black hover:border-purple-500 hover:bg-white rounded">
               Home
-            </li>
+            </div>
           </NavLink>
           <NavLink
             to="/about"
@@ -99,9 +99,9 @@ function Navbar() {
               textDecoration: "none",
             })}
           >
-            <li className="mr-10 p-1 border-2 border-transparent hover:text-black hover:border-purple-500 hover:bg-white rounded">
+            <div className="mr-10 p-1 border-2 border-transparent hover:text-black hover:border-purple-500 hover:bg-white rounded">
               About
-            </li>
+            </div>
           </NavLink>
           <NavLink
             to="/contact"
@@ -110,9 +110,20 @@ function Navbar() {
               textDecoration: "none",
             })}
           >
-            <li className="mr-5 p-1 border-2 border-transparent hover:text-black hover:border-purple-500 hover:bg-white rounded">
+            <div className="mr-10 p-1 border-2 border-transparent hover:text-black hover:border-purple-500 hover:bg-white rounded">
               Contact
-            </li>
+            </div>
+          </NavLink>
+          <NavLink
+            to="/admin"
+            style={({ isActive }) => ({
+              color: isActive ? "rgb(107, 33, 168)" : "#000",
+              textDecoration: "none",
+            })}
+          >
+            <div className="mr-5 p-1 border-2 border-transparent hover:text-black hover:border-purple-500 hover:bg-white rounded">
+              Admin
+            </div>
           </NavLink>
         </div>
         <button
@@ -181,7 +192,7 @@ function Navbar() {
                 textDecoration: "none",
               })}
             >
-              <li className="mb-2 hover:text-purple-500">Home</li>
+              <div className="mb-2 hover:text-purple-500">Home</div>
             </NavLink>
             <NavLink
               to="/about"
@@ -190,7 +201,7 @@ function Navbar() {
                 textDecoration: "none",
               })}
             >
-              <li className="mb-2 hover:text-purple-500">About</li>
+              <div className="mb-2 hover:text-purple-500">About</div>
             </NavLink>
             <NavLink
               to="/contact"
@@ -199,7 +210,16 @@ function Navbar() {
                 textDecoration: "none",
               })}
             >
-              <li className="hover:text-purple-500">Contact</li>
+              <div className="mb-2 hover:text-purple-500">Contact</div>
+            </NavLink>
+            <NavLink
+              to="/admin"
+              style={({ isActive }) => ({
+                color: isActive ? "rgb(107, 33, 168)" : "#000",
+                textDecoration: "none",
+              })}
+            >
+              <div className="hover:text-purple-500">Admin</div>
             </NavLink>
           </ul>
         </div>
