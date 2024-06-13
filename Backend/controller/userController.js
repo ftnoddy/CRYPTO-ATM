@@ -100,6 +100,16 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  if (users) {
+    res.status(200).json(users);
+  } else {
+    res.status(404).json({ message: "User not found" });
+    throw new Error("User not found");
+  }
+});
+
 // Create a new KYC verification document
 const submitKycVerification = async (req, res) => {
     try {
@@ -127,6 +137,21 @@ const submitKycVerification = async (req, res) => {
       res.status(500).json({ message: "KYC verification submission failed", error: error.message });
     }
   };
+
+
+  const getKyc = asyncHandler(async (req, res) => {
+    try {
+      // Retrieve all KYC verification documents from the database
+      const kycVerifications = await KycVerification.find();
+  
+      // Respond with the KYC verification data
+      res.status(200).json(kycVerifications);
+    } catch (error) {
+      // If an error occurs, respond with error status and message
+      console.error(error);
+      res.status(500).json({ message: "Failed to retrieve KYC verifications", error: error.message });
+    }
+  });
 
 
 // @route   POST/ api/users/logout
@@ -162,9 +187,11 @@ const createBuyOrder = async (req, res) => {
     res.status(500).json({ message: 'Failed to create buy order', error: error.message });
   }
 };
- const getBuyOrders = async (req, res) => {
+const getBuyOrders = async (req, res) => {
+  const { email } = req.params;
+
   try {
-    const orders = await BuyBitcoin.find();
+    const orders = await BuyBitcoin.find({ email });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve buy orders', error: error.message });
@@ -172,6 +199,7 @@ const createBuyOrder = async (req, res) => {
 };
 
 
+
 export { registerUser, sendOtpMail, authUser , logoutUser, submitKycVerification , createBuyOrder ,
-  getBuyOrders
+  getBuyOrders, getUsers, getKyc
 };
