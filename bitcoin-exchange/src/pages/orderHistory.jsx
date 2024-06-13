@@ -12,6 +12,7 @@ const OrderHistory = () => {
       { id: 1, walletAddress: '0x123...', cryptoType: 'BTC', amount: 0.5, date: '2023-06-01' },
       { id: 2, walletAddress: '0x456...', cryptoType: 'ETH', amount: 2, date: '2023-06-02' },
       { id: 3, walletAddress: '0x789...', cryptoType: 'USDT', amount: 1500, date: '2023-06-03' }
+      
     ]);
   }, []);
 
