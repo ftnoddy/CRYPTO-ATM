@@ -1,33 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const GetKycUsers = () => {
-  // Dummy data
-  const users = [
-    {
-      email: 'jane.smith@example.com',
-      phoneNumber: '123-456-7890',
-      identityProofType: 'Passport',
-      idProofImage: 'https://placehold.co/64x64',
-      dateOfBirth: '01/01/1980',
-      kycStatus: 'Verified',
-    },
-    {
-      email: 'tim.brown@example.com',
-      phoneNumber: '123-456-7890',
-      identityProofType: 'Driving License',
-      idProofImage: 'https://placehold.co/64x64',
-      dateOfBirth: '02/02/1990',
-      kycStatus: 'Pending',
-    },
-    {
-      email: 'justin.green@example.com',
-      phoneNumber: '123-456-7890',
-      identityProofType: 'Aadhar',
-      idProofImage: 'https://placehold.co/64x64',
-      dateOfBirth: '03/03/2000',
-      kycStatus: 'Verified',     
-    },
-  ];
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchKycUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/users/get-kyc');
+        setUsers(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching KYC users:', error);
+        setError('Error fetching data');
+        setLoading(false);
+      }
+    };
+
+    fetchKycUsers();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div className="p-4">
@@ -50,12 +51,12 @@ const GetKycUsers = () => {
           {users.map((user, index) => (
             <tr className="border-b" key={index}>
               <td className="p-2">{user.email}</td>
-              <td className="p-2">{user.phoneNumber}</td>
-              <td className="p-2">{user.identityProofType}</td>
+              <td className="p-2">{user.contact}</td>
+              <td className="p-2">{user.idProofType}</td>
               <td className="p-2">
-                <img src={user.idProofImage} alt="ID Proof" className="w-16 h-16" />
+                <img src={user.idProofImage || 'https://placehold.co/64x64'} alt="ID Proof" className="w-16 h-16" />
               </td>
-              <td className="p-2">{user.dateOfBirth}</td>
+              <td className="p-2">{new Date(user.dob).toLocaleDateString()}</td>
               <td
                 className={`p-2 font-bold ${
                   user.kycStatus === 'Verified' ? 'text-blue-500' : 'text-red-500'

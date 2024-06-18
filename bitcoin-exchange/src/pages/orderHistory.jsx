@@ -7,27 +7,21 @@ const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    setOrders([
-      { id: 1, walletAddress: '0x123...', cryptoType: 'BTC', amount: 0.5, date: '2023-06-01' },
-      { id: 2, walletAddress: '0x456...', cryptoType: 'ETH', amount: 2, date: '2023-06-02' },
-      { id: 3, walletAddress: '0x789...', cryptoType: 'USDT', amount: 1500, date: '2023-06-03' }
-    ]);
-  }, []);
+    const fetchOrders = async () => {
+      try {
+        if (userInfo) {
+          const response = await axios.get(`http://localhost:5000/api/users/get-crypto/${userInfo.email}`, {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          });
+          setOrders(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching order history', error);
+      }
+    };
 
-  // Uncomment and implement this when the backend is ready
-  // useEffect(() => {
-  //   const fetchOrders = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:5000/api/orders', {
-  //         headers: { Authorization: `Bearer ${user.token}` },
-  //       });
-  //       setOrders(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching order history', error);
-  //     }
-  //   };
-  //   fetchOrders();
-  // }, [user]);
+    fetchOrders();
+  }, [userInfo]);
 
   return (
     <div className="relative min-h-screen bg-fixed bg-cover bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 flex flex-col items-center pt-10">

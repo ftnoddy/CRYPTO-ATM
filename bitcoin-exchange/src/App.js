@@ -14,6 +14,9 @@ import AdminPage from "./pages/admin";
 import GetKycUsers from "./pages/kycUsersPage";
 import GetTotalUsers from "./pages/GetTotalUsers";
 import GetTotalOrders from "./pages/getTotalOrders";
+import CryptoChartPage from "./pages/cryptoChartsPage";
+import PrivacyAndPolicies from "./pages/privacyPolices";
+import KYCDetails from "./pages/kycDetails";
 
 
 function App() {
@@ -34,7 +37,9 @@ function App() {
           <Route path="/get-total-users" element={<GetTotalUsers />} />
           <Route path="/get-total-orders" element={<GetTotalOrders />} />          
           <Route path="/order-history" element={<OrderHistory />} />
-
+          <Route path="/crypto-charts" element={<CryptoChartPage />} />
+          <Route path="/privacy-policies" element={<PrivacyAndPolicies />} />
+          <Route path="/kyc-details" element={<KYCDetails />} />
 
 
         </Routes>

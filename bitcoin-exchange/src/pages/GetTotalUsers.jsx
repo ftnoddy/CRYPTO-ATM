@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const GetTotalUsers = () => {
-  // Dummy data
-  const users = [
-    { username: 'jane.smith', fullname: 'Jane Smith', email: 'jane.smith@example.com', team: 'Team A', inactivity: '5 days' },
-    { username: 'tim.brown', fullname: 'Tim Brown', email: 'tim.brown@example.com', team: 'Team B', inactivity: '2 days' },
-    { username: 'justin.green', fullname: 'Justin Green', email: 'justin.green@example.com', team: 'Team C', inactivity: '1 day' },
-  ];
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/users/get-users');
+        setUsers(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setError('Error fetching data');
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div className="p-4">
@@ -20,11 +42,9 @@ const GetTotalUsers = () => {
             <th className="p-2 text-left">
               <input type="checkbox" />
             </th>
-            <th className="p-2 text-left">User name</th>
-            <th className="p-2 text-left">Full name</th>
+            <th className="p-2 text-left">Name</th>
             <th className="p-2 text-left">Email</th>
-            <th className="p-2 text-left">Teams</th>
-            <th className="p-2 text-left">Inactivity</th>
+            <th className="p-2 text-left">Admin</th>
           </tr>
         </thead>
         <tbody>
@@ -33,11 +53,11 @@ const GetTotalUsers = () => {
               <td className="p-2">
                 <input type="checkbox" />
               </td>
-              <td className="p-2">{user.username}</td>
-              <td className="p-2">{user.fullname}</td>
+              <td className="p-2">{user.name}</td>
               <td className="p-2">{user.email}</td>
-              <td className="p-2">{user.team}</td>
-              <td className="p-2">{user.inactivity}</td>
+              <td className="p-2">
+                {user.isAdmin ? 'Yes' : 'No'}
+              </td>
             </tr>
           ))}
         </tbody>
