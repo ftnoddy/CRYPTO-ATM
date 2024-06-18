@@ -17,6 +17,7 @@ import GetTotalOrders from "./pages/getTotalOrders";
 import CryptoChartPage from "./pages/cryptoChartsPage";
 import PrivacyAndPolicies from "./pages/privacyPolices";
 import KYCDetails from "./pages/kycDetails";
+import RefundAndReturnPolicies from "./pages/refundPolices";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/crypto-charts" element={<CryptoChartPage />} />
           <Route path="/privacy-policies" element={<PrivacyAndPolicies />} />
           <Route path="/kyc-details" element={<KYCDetails />} />
+          <Route path="/refund-return-policies" element={<RefundAndReturnPolicies />} />
 
 
         </Routes>

@@ -10,7 +10,7 @@ const Footer = () => {
           <h5 className="text-xl font-bold">Crypto Selling</h5>
           <p className="text-sm">&copy; 2024 Crypto Selling. All rights reserved.</p>
         </div>
-        <nav className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+        <nav className="flex flex-wrap gap-2 sm:gap-4">
           <Link to="/about" className="text-sm hover:underline underline-offset-4">
             About Us
           </Link>
@@ -19,6 +19,9 @@ const Footer = () => {
           </Link>
           <Link to="/kyc-details" className="text-sm hover:underline underline-offset-4">
             KYC Details
+          </Link>
+          <Link to="/refund-return-policies" className="text-sm hover:underline underline-offset-4">
+            Refund & Return Policies
           </Link>
         </nav>
         <div className="flex gap-4 mt-4 md:mt-0">
