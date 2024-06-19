@@ -1,3 +1,4 @@
+// src/components/Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
@@ -30,10 +31,10 @@ function Signup() {
     try {
       const { data } = await axios.post('http://localhost:5000/api/users', { name, email, otp, password });
       localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate('/');
+      navigate('/kyc');
     } catch (error) {
       console.error('Error during signup', error);
-      alert('Signup failed');
+      toast.error('Signup failed');
     }
   };
 

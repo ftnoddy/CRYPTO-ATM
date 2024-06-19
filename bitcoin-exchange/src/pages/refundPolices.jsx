@@ -5,7 +5,7 @@ const RefundAndReturnPolicies = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
       <div className="container mx-auto px-4 md:px-6">
-        <h1 className="text-4xl font-bold text-gray-800 dark:text-white text-center mb-8">Refund and Return Policies</h1>
+        <h1 className="text-4xl font-bold text-gray-800 dark:text-white text-center mb-8">Refund/Return & Cancellation</h1>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 md:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
@@ -113,8 +113,18 @@ const RefundAndReturnPolicies = () => {
               <li className="mb-2">
                 <strong>Transparency</strong>: Maintain transparency regarding transaction fees, exchange rates, and any other charges associated with cryptocurrency purchases on BitcoinAtm.
               </li>
+
             </ul>
           </div>
+
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Cancellation</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">            The crypto currencies from BitcoinAtm brought to you by iWebGenics are non-refundable.
+              After the crypto currency is delivered to your desired wallet address we will not be held liable for any instance.
+              We are liable for delivering the ordered crypto currencies to the right wallet address of the recipient.
+            </p>
+          </div>
+
         </div>
       </div>
     </div>

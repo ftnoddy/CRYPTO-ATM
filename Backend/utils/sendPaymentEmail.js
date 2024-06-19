@@ -1,13 +1,19 @@
 import nodemailer from 'nodemailer';
 
 const sendPaymentEmail = async (to, amount, cryptoType) => {
+  const amountNumber = parseFloat(amount) || 0;
+  const platformCharge = amountNumber * 0.08;
+  const charge1 = amountNumber * 0.07;
+  const charge2 = amountNumber * 0.06;
+  const totalAmount = amountNumber + platformCharge + charge1 + charge2;
+
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
       user: "atindramohandas353@gmail.com",
-        pass: "pvmqweuhjferjjjk", // Your email password or app password from environment variables
+      pass: "pvmqweuhjferjjjk", // Your email password or app password from environment variables
     },
   });
 
@@ -57,6 +63,11 @@ const sendPaymentEmail = async (to, amount, cryptoType) => {
             <td style="padding: 8px; border: 1px solid #ddd;">810 Seventh Avenue, New York, NY 10019, US</td>
           </tr>
         </table>
+        <h3 style="color: #333;">Charges</h3>
+        <p>Platform Charge (8%): $${platformCharge.toFixed(2)}</p>
+        <p>Charge 1 (7%): $${charge1.toFixed(2)}</p>
+        <p>Charge 2 (6%): $${charge2.toFixed(2)}</p>
+        <p><strong>Total Amount: $${totalAmount.toFixed(2)}</strong></p>
         <p>Once the payment is confirmed, we will send the ${cryptoType} to your wallet address.</p>
         <p>Thank you for choosing our service!</p>
       </div>

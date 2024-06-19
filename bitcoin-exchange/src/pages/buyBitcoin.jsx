@@ -75,6 +75,13 @@ const Buy = () => {
     return amountNumber + platformCharge + charge1 + charge2;
   };
 
+  const calculateCryptoAmount = () => {
+    const amountNumber = parseFloat(amount) || 0;
+    const price = cryptoPrices[cryptoType];
+    if (!price) return 0;
+    return amountNumber / price;
+  };
+
   return (
     <div>
       <div className="relative bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 min-h-screen flex justify-center items-center overflow-hidden">
@@ -141,7 +148,7 @@ const Buy = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="amount" className="block mb-2 text-gray-700">Amount</label>
+                  <label htmlFor="amount" className="block mb-2 text-gray-700">Amount (USD)</label>
                   <input
                     type="number"
                     id="amount"
@@ -165,6 +172,7 @@ const Buy = () => {
               <p>Charge 1 (7%): ${(parseFloat(amount) * 0.07).toFixed(2)}</p>
               <p>Charge 2 (6%): ${(parseFloat(amount) * 0.06).toFixed(2)}</p>
               <p className="font-bold mt-2">Total Amount: ${calculateTotal().toFixed(2)}</p>
+              <p className="font-bold mt-2">Equivalent {cryptoType} Amount: {calculateCryptoAmount().toFixed(6)}</p>
             </div>
           </div>
           <button

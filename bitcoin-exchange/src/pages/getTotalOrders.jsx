@@ -1,33 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const GetTotalOrders = () => {
-  // Dummy data
-  const orders = [
-    {
-      walletAddress: '0xAbc...1234',
-      email: 'john.doe@example.com',
-      cryptocurrencyType: 'Bitcoin (BTC)',
-      amount: 1.5,
-    },
-    {
-      walletAddress: '0xDef...5678',
-      email: 'jane.smith@example.com',
-      cryptocurrencyType: 'Ethereum (ETH)',
-      amount: 10,
-    },
-    {
-      walletAddress: '0xGhi...9012',
-      email: 'tim.brown@example.com',
-      cryptocurrencyType: 'Tether USD (USDT)',
-      amount: 500,
-    },
-    {
-      walletAddress: '0xJkl...3456',
-      email: 'justin.green@example.com',
-      cryptocurrencyType: 'Binance Coin (BNB)',
-      amount: 25,
-    },
-  ];
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/users/get-order');
+        setOrders(response.data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="p-4">
@@ -46,10 +46,10 @@ const GetTotalOrders = () => {
         </thead>
         <tbody>
           {orders.map((order, index) => (
-            <tr className="border-b" key={index}>
+            <tr className="border-b" key={order._id}>
               <td className="p-2">{order.walletAddress}</td>
               <td className="p-2">{order.email}</td>
-              <td className="p-2">{order.cryptocurrencyType}</td>
+              <td className="p-2">{order.cryptoType}</td>
               <td className="p-2">{order.amount}</td>
             </tr>
           ))}
