@@ -6,9 +6,18 @@ import ordersLogo from "../assets/infrastructure.png";
 import GetTotalUsers from './GetTotalUsers';
 import GetKycUsers from './kycUsersPage';
 import GetTotalOrders from './getTotalOrders';
+import ConnectWallet from '../components/connectWallet';
+import SendCrypto from './sendCrypto';
+// import { toast } from 'react-toastify';
 
 const AdminUserPage = () => {
   const [selectedSection, setSelectedSection] = useState(null);
+  const [walletAddress, setWalletAddress] = useState('');
+  const [showSendCrypto, setShowSendCrypto] = useState(false);
+
+  const handleWalletConnected = (address) => {
+    setWalletAddress(address);
+  };
 
   const renderSection = () => {
     switch (selectedSection) {
@@ -59,6 +68,21 @@ const AdminUserPage = () => {
       </div>
 
       {renderSection()}
+
+      <div className="mt-8">
+        <ConnectWallet onWalletConnected={handleWalletConnected} />
+        {walletAddress && (
+          <div className="mt-4 p-4 bg-gray-100 rounded shadow">
+            <button
+              onClick={() => setShowSendCrypto(!showSendCrypto)}
+              className="bg-purple-500 text-white rounded-md px-6 py-2 font-bold transition-transform transform hover:scale-105"
+            >
+              {showSendCrypto ? 'Hide Send Crypto' : 'Show Send Crypto'}
+            </button>
+            {showSendCrypto && <SendCrypto walletAddress={walletAddress} />}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

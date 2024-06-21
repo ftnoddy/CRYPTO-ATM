@@ -20,6 +20,7 @@ import KYCDetails from "./pages/kycDetails";
 import RefundAndReturnPolicies from "./pages/refundPolices";
 import TermsAndConditions from "./pages/termsAndCondication";
 import ShippingPolicies from "./pages/shppingPolices";
+import SendCrypto from "./pages/sendCrypto";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/refund-return-policies" element={<RefundAndReturnPolicies />} />
           <Route path="/terms-conditions" element={<TermsAndConditions />} />
           <Route path="/shipping-policies" element={<ShippingPolicies />} />
+          <Route path="/send-crypto" element={<SendCrypto />} />
 
 
         </Routes>
