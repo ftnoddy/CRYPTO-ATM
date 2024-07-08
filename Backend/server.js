@@ -17,7 +17,16 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: [''], // Add your frontend URLs here
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
+
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -32,10 +41,10 @@ app.get('/api', (req, res) => {
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname, '/vite-project/dist')));
+  app.use(express.static(path.join(__dirname, '/bitcoin-exchange/dist')));
 
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'vite-project', 'dist', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'bitcoin-exchange', 'dist', 'index.html'))
   );
 } else {
   app.get('/', (req, res) => {
