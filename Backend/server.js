@@ -18,7 +18,7 @@ connectDB();
 
 // Middleware
 const corsOptions = {
-  origin: ['https://crypto-atm-client.vercel.app'], // Add your frontend URLs here
+  origin: ['http://localhost:3000','https://crypto-atm-client.vercel.app'], // Add your frontend URLs here
   methods: 'GET,POST',
   credentials: true,
   optionsSuccessStatus: 204
