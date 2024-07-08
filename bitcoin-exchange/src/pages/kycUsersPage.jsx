@@ -10,7 +10,11 @@ const GetKycUsers = () => {
     const fetchKycUsers = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/users/get-kyc');
-        setUsers(response.data);
+        const updatedUsers = response.data.map(user => ({
+          ...user,
+          kycStatus: user.idProofImage ? 'Verified' : 'Pending'
+        }));
+        setUsers(updatedUsers);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching KYC users:', error);
@@ -34,7 +38,7 @@ const GetKycUsers = () => {
     <div className="p-4">
       <div className="mb-4">
         <span className="text-zinc-500">Admin / KYC Users</span>
-        <span className="ml-4 text-zinc-500">Total: {users.length}</span> 
+        <span className="ml-4 text-zinc-500">Total: {users.length}</span>
       </div>
       <table className="min-w-full bg-white dark:bg-zinc-800">
         <thead>
@@ -54,7 +58,13 @@ const GetKycUsers = () => {
               <td className="p-2">{user.contact}</td>
               <td className="p-2">{user.idProofType}</td>
               <td className="p-2">
-                <img src={user.idProofImage || 'https://placehold.co/64x64'} alt="ID Proof" className="w-16 h-16" />
+                {user.idProofImage ? (
+                  <a href={`http://localhost:5000/${user.idProofImage}`} download>
+                    <img src={`http://localhost:5000/${user.idProofImage}`} alt="ID Proof" className="w-16 h-16" />
+                  </a>
+                ) : (
+                  'N/A'
+                )}
               </td>
               <td className="p-2">{new Date(user.dob).toLocaleDateString()}</td>
               <td

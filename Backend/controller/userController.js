@@ -187,6 +187,25 @@ const createBuyOrder = async (req, res) => {
     res.status(500).json({ message: 'Failed to create buy order', error: error.message });
   }
 };
+
+const getOrder = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    let orders;
+
+    if (email) {
+      orders = await BuyBitcoin.find({ email });
+    } else {
+      orders = await BuyBitcoin.find();
+    }
+
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to retrieve orders', error: error.message });
+  }
+};
+
 const getBuyOrders = async (req, res) => {
   const { email } = req.params;
 
@@ -201,5 +220,5 @@ const getBuyOrders = async (req, res) => {
 
 
 export { registerUser, sendOtpMail, authUser , logoutUser, submitKycVerification , createBuyOrder ,
-  getBuyOrders, getUsers, getKyc
+  getBuyOrders, getUsers, getKyc, getOrder
 };
