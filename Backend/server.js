@@ -15,7 +15,7 @@ const app = express();
 
 // Connect to MongoDB
 connectDB();
-
+//vx
 // Middleware
 const corsOptions = {
   origin: ['http://localhost:3000','https://crypto-atm-client.vercel.app'], // Add your frontend URLs here
